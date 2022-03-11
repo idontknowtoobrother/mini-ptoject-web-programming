@@ -40,6 +40,8 @@ var con = mysql.createConnection({
   password: 'whereismypassword'
 })
 
+
+
 con.connect((err) => {
 
   if(err)return console.log(`${TAG_DATABASE} Error connecting`)
