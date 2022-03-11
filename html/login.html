@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>Login.html</title>
+<link rel = "stylesheet" ype = "text/css" href = "login.css" />
+</head>
+<body> 
+  <fieldset style="width: 500px;">
+  <h1>LOGIN FORM</h1>
+
+  <form action = "/login" method = "POST">
+  <label for = "txtEmail">Email</label>
+  <input type="email" name="email" id="txtEmail" placeholder="Email"><br><br>
+
+  <label for = "txtPass">Password</label>
+  <input type="password" name="password" id="txtPass" placeholder="Password"><br><br>
+
+  <input class="button" type="submit" value="SUBMIT">
+  </form>
+  </fieldset>
+<div >
+</div>
+</body>
+</html>
+
+<style>
+  h1{
+    text-align: center;
+    color: rgb(70, 211, 35);
+}
+
+  input[type=email], select, textarea{
+    width: 80%;
+    padding: 12px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    float: right;
+  }
+  input[type=password], select, textarea{
+    width: 80%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    float: right;
+  }
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+input[type=submit] {
+    background-color: #1bd42a;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    position: relative;
+    left:100px;
+  }
+
+</style>
