@@ -12,9 +12,12 @@ const PORT = 3000
 const BG_GREEN = '\x1b[42m'
 const COLOR_BLACK = '\x1b[30m'
 const COLOR_YELLOW = '\x1b[33m'
+const COLOR_GREEN = '\x1b[32m'
+const COLOR_RED = '\x1b[31m'
 const COLOR_RESET = '\x1b[0m'
 const TAG_DATABASE = `${BG_GREEN}${COLOR_BLACK} DATABASE ${COLOR_RESET}`
 const TAG_SERVER = `${BG_GREEN}${COLOR_BLACK} SERVER ${COLOR_RESET}`
+const TAG_LOG = `${BG_GREEN}${COLOR_BLACK} LOG ${COLOR_RESET}`
 
 let server = express()
 server.use(bodyParser.json())  
@@ -50,12 +53,14 @@ server.get('/logout', function (req, res){
   if(!user)return res.status(404).send(`404 not found.`) 
 
   // logout logging
-  logoutLogging(con, user.id_employee)
+  logoutLogging(con, user.id_employee, id => {
 
-  res.render(__dirname + "/html/login.html")
+    console.log(`${TAG_LOG} user_id ${COLOR_YELLOW}${id} ${COLOR_RED}logged out${COLOR_RESET}`)
+    res.render(__dirname + "/html/login.html")
+    user = null
 
-  user = null
-
+  })
+ 
 })
 
 server.post('/login', function (req, res){
@@ -82,13 +87,16 @@ server.get('/main', function (req, res){
   // if user == null || user == undefined
   if(!user)return res.status(404).send(`404 not found.`) 
 
-  // logout logging
-  loginLogging(con, user.id_employee)
+  // login logging
+  loginLogging(con, user.id_employee, id => {
 
-  res.render(__dirname + "/html/main_menu.html", {
-    name: user.name,
-    surname: user.surname,
-    position: user.position
+    console.log(`${TAG_LOG} user_id ${COLOR_YELLOW}${id} ${COLOR_GREEN}logged in${COLOR_RESET}`)
+    res.render(__dirname + "/html/main_menu.html", {
+      name: user.name,
+      surname: user.surname,
+      position: user.position
+    })
+
   })
 
 })
