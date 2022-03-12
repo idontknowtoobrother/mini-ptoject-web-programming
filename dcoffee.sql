@@ -42,7 +42,8 @@ CREATE TABLE `mst_employee` (
 
 INSERT INTO `mst_employee` (`id_employee`, `name`, `surname`, `position`, `salary`, `total_sale`) VALUES
 (1, 'สุขใจ', 'ไทยเดิม', 'พนักงาน', 5000.00, 30000.00),
-(2, 'มานี', 'รักถิ่นไทย', 'เจ้าของร้าน', 6000.00, 50000.00);
+(2, 'มานี', 'รักถิ่นไทย', 'เจ้าของร้าน', 6000.00, 50000.00)
+(3, 'hex', 'demical', 'เจ้าของร้าน', 6000.00, 50000.00);
 
 -- --------------------------------------------------------
 
@@ -64,6 +65,7 @@ CREATE TABLE `mst_security` (
 INSERT INTO `mst_security` (`id_security`, `user`, `password`, `id_employee`) VALUES
 (1, 'sutgai.t@gmail.com', 'qw123', 1),
 (2, 'manee.r@gmail.com', 'as123', 2);
+(3, 'hex@gmail.com', '', 3);
 
 -- --------------------------------------------------------
 
