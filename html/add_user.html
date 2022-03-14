@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Main menu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&family=Source+Code+Pro:ital,wght@0,300;1,200&display=swap');
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        /* Style the header */
+        .header {
+            /* padding-left: 80px;
+            padding-right: 80px;
+            border-bottom: 1px solid;
+            text-align: right;
+            display: grid;
+            grid-template-columns: 50% 50%; */
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid;
+        }
+
+        /* Style the top navigation bar */
+        .sidenav {
+            height: 100%;
+            /* Full-height: remove this if you want "auto" height */
+            width: 180px;
+            /* Set the width of the sidebar */
+            position: fixed;
+            /* Fixed Sidebar (stay in place on scroll) */
+            z-index: 5;
+            /* Stay on top */
+            top: 5;
+            /* Stay at the top */
+            left: 5;
+            background-color: white;
+            border-right: 1px solid;
+            /* Black */
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            padding-top: 20px;
+        }
+
+        /* The navigation menu links */
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 22px;
+            color: #000000;
+            display: block;
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #00fa0cd5;
+        }
+
+
+        /* Create three equal columns that floats next to each other */
+        .column {
+            float: right;
+            width: 29.83%;
+            padding: 15px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            border: 1px solid;
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media screen and (max-width:900px) {
+            .column {
+                width: 60%;
+            }
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: #9cff83;
+            padding: 1px;
+            width: 100%;
+            position: fixed;
+            z-index: 6;
+            bottom: 0%;
+            text-align: center;
+            border-top: 1px solid black;
+            font-size: 20px;
+            font-style: italic;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+
+        #person-info {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .container-adduser {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+    </style>
+</head>
+
+<body onload="myFunction()">
+    <form action="/mainmenu" method="GET">
+        <div class="header">
+        
+            <img style="width:100px;" src="LOGO.jpg">
+    
+            <div id="person-info">
+                <img style="width:100px" src="MEMBER.jpg">
+                <p id="name">ชื่อ: 
+                    <%= name %>
+                        <%= surname %> 
+                </p>
+            </div>
+    
+        </div>
+    
+        <div class="sidenav" id="menu">
+            <div><a href="/managment" id="btnManage"><img src="mana.png" width="150" height="50"></a></div>
+            <div><a href="/logout" id="btnManage"><img src="out.png" width="150" height="50"></a></div>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
+    </form>
+    
+    <div class="container-adduser">
+        <h2><%= title %></h2>
+        <form action="/save" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Password:</label>
+                <input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="surname">Surname:</label>
+                <input type="text" class="form-control" id="surname" placeholder="Enter Surname" name="surname" required>
+            </div>
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <input type="text" class="form-control" id="position" placeholder="Enter Position" name="position" required>
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary:</label>
+                <input type="number" class="form-control" id="salary" placeholder="Enter Salary" name="salary" required>
+            </div>
+            <div class="form-group">
+                <label for="total_sale">Total Sale:</label>
+                <input type="number" class="form-control" id="total_sale" placeholder="Enter Total Sale" name="total_sale" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+    
+</body>
+<script>
+    var btn = document.getElementById("btnManage")
+    var pos = "<%= position %>"
+
+    function myFunction(){
+        if(pos == "พนักงาน")
+        btn.style.visibility = "hidden";
+    }
+
+</script>
+
+</html>
