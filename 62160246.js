@@ -58,10 +58,10 @@ server.engine('html', require('ejs').renderFile)
 
 // Mock user
 var con = mysql.createConnection({
-  host: '127.0.0.1',
+  host: '154.202.3.51',
   user: 'root',
-  database: 'dcoffee',
-  password: 'whereismypassword'
+  database: 'licensecheck',
+  password: '85*xKioc@p_x'
 })
 
 // functions - start
