@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main Menu</title>
+  <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous" 
+  />
+</head>
+
+<body onload="myFunction()">
+  <div class="container-fluid borderpx px-0 ">
+    <div class="row no-gutters">
+      <div class="col-3 text-center borderpx py-3">
+        <img src="../img/LOGO.jpg" width="90" height="80" />
+      </div>
+      <div class="col-9 text-right px-5 borderpx2 py-3">
+        <img src="../img/MEMBER.jpg" width="70" height="70" />
+        ชื่อ : <%= name %>
+          <%= surname %>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-3 text-center">
+        <nav class="nav flex-column text-center">
+          <ul class="nav flex-column text-center">
+            <li class="nav-item borderpx3 py-4">
+              <a class="nav-link" href="#" id="memberControl">จัดการข้อมูลผู้ใช้</a>
+            </li>
+            <li class="nav-item borderpx3 py-4">
+              <a class="nav-link" href="/logout">ออกจากระบบ</a>
+            </li>
+            <li class="nav-item borderpx3 py-4">
+              <a class="nav-link disabled" href="#">-</a>
+            </li>
+            <li class="nav-item borderpx3 py-4">
+              <a class="nav-link" href="#">-</a>
+            </li>
+            <li class="nav-item borderpx3 py-4">
+              <a class="nav-link" href="#">-</a>
+            </li>
+            <li class="nav-item borderpx3 py-4">
+              <a class="nav-link" href="#">-</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col" id="div1"></div>
+    </div>
+    <footer class="footer bg-light text-center text-lg-start">
+      <div class="text-center p-3 py-4" style="background-color: rgb(138, 208, 13);;"></div>
+    </footer>
+  </div>
+</body>
+<style>
+  .borderpx {
+    border: 2px solid rgb(0, 0, 0);
+  }
+
+  .borderpx2 {
+    border: 2px solid rgb(0, 0, 0);
+    border-left: 0px;
+  }
+
+  .borderpx3 {
+    border: 2px solid rgb(0, 0, 0);
+    border-top: 0px;
+  }
+
+  a {
+    font-size: 20px;
+    color: black;
+  }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+  var btn = document.getElementById("memberControl")
+  var pos = "<%= position %>"
+
+    function myFunction(){
+        if(pos == "พนักงาน")
+        btn.style.visibility = "hidden";
+
+      $("#memberControl").click(function(){
+        $("#div1").load("/memcon")
+      })
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.j
+s" integrity="sha384-
+UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-
+JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

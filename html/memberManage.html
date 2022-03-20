@@ -1,0 +1,141 @@
+<html lang="en">
+
+<head>
+  <title>หน้าจอจัดการข้อมูลผู้ใช้</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+
+<body>
+
+  <div class="container borderpx">
+    <div class="row py-2 px-2 borderpx" style="background-color: rgb(134, 243, 83);">
+      <div class="col">
+        <h4 class="text-center">หน้าจอจัดการข้อมูลผู้ใช้</h4>
+      </div>
+    </div>
+    <div class="row py-3 ">
+      <div class="col-5 text-center">
+        <form class="form-inline" id="form" name="form">
+          <label for="search" class="col-sm-4 col-form-label">
+            ค้นหาข้อมูลผู้ใช้:
+          </label>
+          <input type="text" class="form-control" id="search" name="search" placeholder="ค้นหาข้อมูล">
+          <a href="#" id="searchMember" class="btn btn-secondary col-sm-2">ค้นหา</a>
+        </form>
+      </div>
+      <div class="col">
+        <a class="btn btn-success" href="#" id="addMember">เพิ่มข้อมูล</a>
+      </div>
+      <div class="row px-1">
+        <div class="col">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">ลำดับ</th>
+                <th scope="col">ชื่อ</th>
+                <th scope="col">สกุล</th>
+                <th scope="col">ตำแหน่ง</th>
+                <th scope="col">เงินเดือน</th>
+                <th scope="col">ยอดขายรวม</th>
+                <th scope="col">แก้ไข</th>
+                <th scope="col">ลบ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(data.length){ for(var i=0; i < data.length; i++) {%>
+                <tr>
+                  <th scope="row">
+                    <%= (i+1) %>
+                  </th>
+                  <td>
+                    <%= data[i].name %>
+                  </td>
+                  <td>
+                    <%= data[i].surname %>
+                  </td>
+                  <td>
+                    <%= data[i].position %>
+                  </td>
+                  <td>
+                    <%= data[i].salary %>
+                  </td>
+                  <td>
+                    <%= data[i].total_sale %>
+                  </td>
+                  <td>
+                    <a class="btn btn-primary" href="#" onclick="editMember('<%=data[i].id_employee%>')">แก้ไข</a>
+                  </td>
+                  <td>
+                    <a class="btn btn-danger" href="#" onclick="deleteMember('<%=data[i].id_employee%>')">ลบ</a>
+                  </td>
+                </tr>
+                <% } }else{ %>
+                  <tr>
+                    <td colspan="3">NO User</td>
+                  </tr>
+                  <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+
+<style>
+  p {
+    font-weight: bolder;
+  }
+
+  .borderpx {
+    border: 2px solid rgb(0, 0, 0);
+  }
+
+  .mybtn {
+    background-color: rgb(154, 255, 71);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .mybtn2 {
+    background-color: rgb(245, 78, 78);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+  $(function () {
+    $('#addMember').click(function () {
+      $('#div1').load('./addmember.html')
+    })
+    $('#searchMember').click(function () {
+      var empt = document.form.search.value
+      if (empt === '') {
+        $('#div1').load('./memberManage.html')
+      } else {
+        $('#div1').load('./search/' + empt)
+      }
+    })
+  })
+  function editMember(id) {
+    $('#div1').load('./edit/' + id)
+  }
+  function deleteMember(id) {
+    $('#div1').load('./delete/' + id)
+  }
+</script>
+
+</html>

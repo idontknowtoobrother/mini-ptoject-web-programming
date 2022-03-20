@@ -1,0 +1,140 @@
+<html lang="en">
+
+<head>
+  <title>การเพิ่มข้อมูลผู้ใช้</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="container borderpx">
+    <div class="row py-2 px-2 borderpx" style="background-color: rgb(134, 243, 83);">
+      <div class="col">
+        <h4 class="text-center">การเพิ่มข้อมูลผู้ใช้</h4>
+      </div>
+    </div>  
+      <div class="row pt-3">
+        <div class="col">
+          <h4>ข้อมูลผู้ใช้ :</h4>
+        </div>
+      </div>
+      <form id="form" name="form" onsubmit="required()">
+        <div class="row py-2 px-3">
+          <div class="col py-2 px-2">
+            <label for="name">ชื่อ : </label>
+            <input type="text" name="name" id="name" maxlength="50" />
+            <br />
+            <label for="position">ตำแหน่ง : </label>
+            <input type="text" name="position" id="position" maxlength="50" />
+            <br />
+            <label for="total_sale">ยอดขายทั้งหมด (บาท) : </label>
+            <input type="number" name="total_sale" id="total_sale" step="0.0000001">
+            <br />
+          </div>
+        <div class="col py-2 px-2">
+          <label for="surname">สกุล : </label>
+          <input type="text" name="surname" id="surname" maxlength="50" />
+          <br />
+          <label for="salary">เงินเดือน (บาท) : </label>
+          <input type="number" name="salary" id="salary" step="0.0000001" />
+          <br />
+        </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <h4>ข้อมูลเข้าสู่ระบบ :</h4>
+          </div>
+        </div>
+        <div class="row py-2 px-3">
+          <div class="col py-2 px-2">
+            <label for="email">Email : </label>
+            <input type="email" name="email" id="email" maxlength="50" />
+          </div>
+          <div class="col py-2 px-2">
+            <label for="password">Password : </label>
+            <input type="password" name="password" id="password" maxlength="50" />
+            <br /> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col px-2 py-2">
+            <input class="btn mybtn" id="save" type="submit" value="ตกลง" />           
+            <a class="btn mybtn2" id="cancel" href="/aMain">ยกเลิก</a>
+          </div>
+        </div>
+        </form>
+      </div>    
+</body>
+
+<style>
+  p {
+    font-weight: bolder;
+  }
+
+  .borderpx {
+    border: 2px solid rgb(0, 0, 0);
+  }
+
+  .mybtn {
+    background-color: rgb(154, 255, 71);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .mybtn2 {
+    background-color: rgb(245, 78, 78);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+  $(function (){
+    $('#cancel').click(function (){
+      $('#div').load('./addmember.html')
+    })
+  })
+
+  function required(){
+    var empt = document.form.email.value
+    var empt2 = document.form.password.value
+    var empt3 = document.form.name.value
+    var empt4 = document.form.surname.value
+    var empt5 = document.form.position.value
+    var empt6 = document.form.salary.value
+    var empt7 = document.form.total_sale.value
+    if(
+        empt === '' ||
+        empt2 === '' ||
+        empt3 === '' ||
+        empt4 === '' ||
+        empt5 === '' ||
+        empt6 === '' ||
+        empt7 === ''
+      ){
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน')
+        return false
+      }else{
+        document.getElementById('form').action = '/addMember'
+        document.getElementById('form').method = 'POST'
+        alert('เพิ่มข้อมูลสำเร็จ')
+        return true
+      }
+  }
+
+</script>
+
+</html>
