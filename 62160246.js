@@ -36,13 +36,13 @@ con.connect((err) => {
 });
 
 server.get('/logout', function (req, res) {
-  if(user.data == undefined || user.data.id_employee == undefined)res.render(__dirname + "/html/login.html");
+  if(user.data == undefined || user.data.id_employee == undefined)res.render(__dirname + "/html/user_login.html");
 
   const id = user.data.id_employee
   con.query('INSERT INTO trn_logout (id_employee, datetime_logout) VALUES(?, NOW())', id, function (err) {
     if (err) return err;
   })
-  res.render(__dirname + "/html/login.html")
+  res.render(__dirname + "/html/user_login.html")
 })
 
 server.post('/login', function (req, res) {
@@ -55,7 +55,7 @@ server.post('/login', function (req, res) {
       return err;
     }
     if (data.length == 0) {
-      return res.sendFile(__dirname + '/html/nonmember.html')
+      return res.sendFile(__dirname + '/html/user_nonmember.html')
     }
     if (data[0] == null) {
       return res.redirect('/')
@@ -64,18 +64,18 @@ server.post('/login', function (req, res) {
       user = {
         data: data2[0]
       }
-      res.redirect('/aMain')
+      res.redirect('/user_mainmenu')
     })
   })
 });
 
 
-server.get('/aMain', function (req, res) {
+server.get('/user_mainmenu', function (req, res) {
   const id = user.data.id_employee
   con.query('INSERT INTO trn_login (id_employee, datetime_login) VALUES(?, NOW())', id, function (err) {
     if (err) return err;
   })
-  res.render(__dirname + "/html/aMain.html", {
+  res.render(__dirname + "/html/user_mainmenu.html", {
     name: user.data.name,
     surname: user.data.surname,
     position: user.data.position
@@ -86,7 +86,7 @@ server.get('/memcon', function (req, res, next) {
   con.query('SELECT id_employee, name, surname, position, FORMAT(salary,2) AS salary , FORMAT(total_sale,2) as total_sale FROM `mst_employee`',
     (err, data) => {
       if (err) throw err
-      res.render(__dirname + "/html/memberManage.html", { data: data })
+      res.render(__dirname + "/html/user_management.html", { data: data })
     }
   )
 })
@@ -96,7 +96,7 @@ server.post('/update', function(req, res, next){
   con.query("UPDATE mst_employee SET name = ? , surname = ? , position = ? , salary = ? , total_sale = ? WHERE id_employee = ?", [employee.name, employee.surname, employee.position, employee.salary, employee.total_sale, employee.id_employee], function(err, result) {
     if(err) return;
     con.query("UPDATE mst_security SET user = ? , password = ? WHERE id_employee = ?", [employee.email, employee.password, employee.id_employee], function(err, result){
-      res.redirect('/aMain')
+      res.redirect('/user_mainmenu')
     })
   });
 }) 
@@ -110,12 +110,12 @@ server.get('/search/:word', function (req, res, next) {
     'SELECT id_employee, name, surname, position, salary , total_sale FROM mst_employee WHERE name LIKE ' + search + ' OR surname LIKE ' + search + ' OR position LIKE ' + search
   con.query(query, (err, data) => {
     if (err) throw err
-    res.render(__dirname + '/html/memberManage.html', { data: data })
+    res.render(__dirname + '/html/user_management.html', { data: data })
   })
 })
 
-server.get('/addmember', function (req, res) {
-  res.sendFile(__dirname + "/html" + "/addmember.html");
+server.get('/user_add', function (req, res) {
+  res.sendFile(__dirname + "/html" + "/user_add.html");
 })
 
 
@@ -142,7 +142,7 @@ server.post('/addMember', function (req, res, next) {
       return res.status(201)
     })
   })
-  res.redirect('/aMain')
+  res.redirect('/user_mainmenu')
 })
 
 server.get('/edit/:id', function (req, res) {
@@ -179,7 +179,7 @@ server.post('/delete', function (req, res) {
       con.query('DELETE FROM trn_login WHERE id_employee = ?', [id_employee], function(){
         con.query('DELETE FROM mst_security WHERE id_employee = ?', [id_employee], function(){
           con.query('DELETE FROM mst_employee WHERE id_employee = ?', [id_employee], function(){
-            res.redirect('/aMain')
+            res.redirect('/user_mainmenu')
           })
         })
       })
@@ -189,7 +189,7 @@ server.post('/delete', function (req, res) {
 
 
 server.get('/', function (req, res) {
-  res.sendFile(__dirname + "/html" + "/login.html");
+  res.sendFile(__dirname + "/html" + "/user_login.html");
 })
 
 

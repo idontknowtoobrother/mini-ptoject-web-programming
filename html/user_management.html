@@ -119,12 +119,12 @@
 <script>
   $(function () {
     $('#addMember').click(function () {
-      $('#div1').load('./addmember.html')
+      $('#div1').load('./user_add.html')
     })
     $('#searchMember').click(function () {
       var empt = document.form.search.value
       if (empt === '') {
-        $('#div1').load('./memberManage.html')
+        $('#div1').load('./user_management.html')
       } else {
         $('#div1').load('./search/' + empt)
       }
