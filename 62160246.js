@@ -36,6 +36,8 @@ con.connect((err) => {
 });
 
 server.get('/logout', function (req, res) {
+  if(user.data == undefined || user.data.id_employee == undefined)res.render(__dirname + "/html/login.html");
+
   const id = user.data.id_employee
   con.query('INSERT INTO trn_logout (id_employee, datetime_logout) VALUES(?, NOW())', id, function (err) {
     if (err) return err;
@@ -84,18 +86,26 @@ server.get('/memcon', function (req, res, next) {
   con.query('SELECT id_employee, name, surname, position, FORMAT(salary,2) AS salary , FORMAT(total_sale,2) as total_sale FROM `mst_employee`',
     (err, data) => {
       if (err) throw err
-      console.log(data)
       res.render(__dirname + "/html/memberManage.html", { data: data })
     }
   )
 })
+
+server.post('/update', function(req, res, next){
+  const employee = req.body
+  con.query("UPDATE mst_employee SET name = ? , surname = ? , position = ? , salary = ? , total_sale = ? WHERE id_employee = ?", [employee.name, employee.surname, employee.position, employee.salary, employee.total_sale, employee.id_employee], function(err, result) {
+    if(err) return;
+    con.query("UPDATE mst_security SET user = ? , password = ? WHERE id_employee = ?", [employee.email, employee.password, employee.id_employee], function(err, result){
+      res.redirect('/aMain')
+    })
+  });
+}) 
 
 server.get('/search/:word', function (req, res, next) {
   let { word } = req.params
   search = "'%"
   search += word
   search += "%'"
-  console.log(search)
   let query =
     'SELECT id_employee, name, surname, position, salary , total_sale FROM mst_employee WHERE name LIKE ' + search + ' OR surname LIKE ' + search + ' OR position LIKE ' + search
   con.query(query, (err, data) => {
@@ -107,6 +117,7 @@ server.get('/search/:word', function (req, res, next) {
 server.get('/addmember', function (req, res) {
   res.sendFile(__dirname + "/html" + "/addmember.html");
 })
+
 
 server.post('/addMember', function (req, res, next) {
   var employee = {
@@ -133,6 +144,48 @@ server.post('/addMember', function (req, res, next) {
   })
   res.redirect('/aMain')
 })
+
+server.get('/edit/:id', function (req, res) {
+  if(!req.params.id)return;
+
+  con.query('SELECT * FROM mst_employee WHERE id_employee = ?', [req.params.id], function (err, data2) {
+    let user = data2[0]
+    con.query('SELECT * FROM mst_security WHERE id_employee = ?', [req.params.id], function (err, secureData) {
+      user.user = secureData[0].user
+      user.password = secureData[0].password
+      res.render(__dirname + "/html/user_edit.html", { 
+        user: user
+      })
+    })
+  })
+})
+
+
+
+server.get('/req-delete/:id', function (req, res) {
+  if(!req.params.id)return;
+  con.query('SELECT * FROM mst_employee WHERE id_employee = ?', [req.params.id], function (err, data2) {
+    res.render(__dirname + "/html/user_remove.html", { 
+      user: data2[0]
+    })
+  })
+})
+
+server.post('/delete', function (req, res) {
+
+  const id_employee = req.body.id_employee
+  if(id_employee == undefined || id_employee == null)return;
+    con.query('DELETE FROM trn_logout WHERE id_employee = ?', [id_employee], function(){
+      con.query('DELETE FROM trn_login WHERE id_employee = ?', [id_employee], function(){
+        con.query('DELETE FROM mst_security WHERE id_employee = ?', [id_employee], function(){
+          con.query('DELETE FROM mst_employee WHERE id_employee = ?', [id_employee], function(){
+            res.redirect('/aMain')
+          })
+        })
+      })
+    })
+})
+
 
 
 server.get('/', function (req, res) {

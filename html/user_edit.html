@@ -1,216 +1,135 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Main menu</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style>
-        
-        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&family=Source+Code+Pro:ital,wght@0,300;1,200&display=swap');
-
-        * {
-            box-sizing: border-box;
-            font-family: 'Prompt', sans-serif;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        /* Style the header */
-        .header {
-            /* padding-left: 80px;
-            padding-right: 80px;
-            border-bottom: 1px solid;
-            text-align: right;
-            display: grid;
-            grid-template-columns: 50% 50%; */
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid;
-        }
-
-        /* Style the top navigation bar */
-        .sidenav {
-            height: 100%;
-            /* Full-height: remove this if you want "auto" height */
-            width: 180px;
-            /* Set the width of the sidebar */
-            position: fixed;
-            /* Fixed Sidebar (stay in place on scroll) */
-            z-index: 5;
-            /* Stay on top */
-            top: 5;
-            /* Stay at the top */
-            left: 5;
-            background-color: white;
-            border-right: 1px solid;
-            /* Black */
-            overflow-x: hidden;
-            /* Disable horizontal scroll */
-            padding-top: 20px;
-        }
-
-        /* The navigation menu links */
-        .sidenav a {
-            padding: 6px 8px 6px 16px;
-            text-decoration: none;
-            text-align: center;
-            font-size: 22px;
-            color: #000000;
-            display: block;
-        }
-
-        /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
-            color: #00fa0cd5;
-        }
-
-
-        /* Create three equal columns that floats next to each other */
-        .column {
-            float: right;
-            width: 29.83%;
-            padding: 15px;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            border: 1px solid;
-            display: table;
-            clear: both;
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width:900px) {
-            .column {
-                width: 60%;
-            }
-        }
-
-        /* Style the footer */
-        .footer {
-            background-color: #9cff83;
-            padding: 1px;
-            width: 100%;
-            position: fixed;
-            z-index: 6;
-            bottom: 0%;
-            text-align: center;
-            border-top: 1px solid black;
-            font-size: 20px;
-            font-style: italic;
-            font-weight: bold;
-            color: rgb(255, 255, 255);
-        }
-
-        #person-info {
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        #customers {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        #customers td, #customers th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-        #customers tr:hover {background-color: #ddd;}
-
-        #customers th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        .container-edituser {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-    </style>
+  <title>การแก้ไขข้อมูลผู้ใช้</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
 
-<body onload="myFunction()">
-    <form action="/mainmenu" method="GET">
-        <div class="header">
-        
-            <img style="width:100px;" src="LOGO.jpg">
-    
-            <div id="person-info">
-                <img style="width:100px" src="MEMBER.jpg">
-                <p id="name">ชื่อ: 
-                    <%= name %>
-                        <%= surname %> 
-                </p>
-            </div>
-    
+<body>
+  <div class="container borderpx">
+    <div class="row py-2 px-2 borderpx" style="background-color: rgb(134, 243, 83);">
+      <div class="col">
+        <h4 class="text-center">การแก้ไขข้อมูลผู้ใช้</h4>
+      </div>
+    </div>  
+      <div class="row pt-3">
+        <div class="col">
+          <h4>ข้อมูลผู้ใช้ :</h4>
         </div>
-    
-        <div class="sidenav" id="menu">
-            <div><a href="/managment" id="btnManage"><img src="mana.png" width="150" height="50"></a></div>
-            <div><a href="/logout" id="btnManage"><img src="out.png" width="150" height="50"></a></div>
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
+      </div>
+      <form id="form" name="form" onsubmit="required()">
+        <input type="hidden" value="<%= user.id_employee %>" name="id_employee">
+        <div class="row py-2 px-3">
+          <div class="col py-2 px-2">
+            <label for="name">ชื่อ : </label>
+            <input type="text" name="name" id="name" maxlength="50" value="<%= user.name %>" />
+            <br />
+            <label for="position">ตำแหน่ง : </label>
+            <input type="text" name="position" id="position" maxlength="50" value="<%= user.position %>" />
+            <br />
+            <label for="total_sale">ยอดขายทั้งหมด (บาท) : </label>
+            <input type="number" name="total_sale" id="total_sale" step="0.0000001" value="<%= user.total_sale %>">
+            <br />
+          </div>
+        <div class="col py-2 px-2">
+          <label for="surname">สกุล : </label>
+          <input type="text" name="surname" id="surname" maxlength="50" value="<%= user.surname %>" />
+          <br />
+          <label for="salary">เงินเดือน (บาท) : </label>
+          <input type="number" name="salary" id="salary" step="0.0000001" value="<%= user.salary %>" />
+          <br />
         </div>
-    </form>
-    
-    <div class="container-edituser">
-        <h2><%= title %></h2>
-        <form action="/update" method="post">
-            <input type="hidden" value="<%= user.id_employee %>" name="id_employee">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter Name" value="<%= user.name %>" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="surname">Surname:</label>
-                <input type="text" class="form-control" id="surname" placeholder="Enter Surname" value="<%= user.surname %>" name="surname" required>
-            </div>
-            <div class="form-group">
-                <label for="position">Position:</label>
-                <input type="text" class="form-control" id="position" placeholder="Enter Position" value="<%= user.position %>" name="position" required>
-            </div>
-            <div class="form-group">
-                <label for="salary">Salary:</label>
-                <input type="number" class="form-control" id="salary" placeholder="Enter Salary" value="<%= user.salary %>" name="salary" required>
-            </div>
-            <div class="form-group">
-                <label for="total_sale">Total Sale:</label>
-                <input type="number" class="form-control" id="total_sale" placeholder="Enter Total Sale" value="<%= user.total_sale %>" name="total_sale" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="row pt-3">
+          <div class="col">
+            <h4>ข้อมูลเข้าสู่ระบบ :</h4>
+          </div>
+        </div>
+        <div class="row py-2 px-3">
+          <div class="col py-2 px-2">
+            <label for="email">Email : </label>
+            <input type="email" name="email" id="email" maxlength="50" value="<%= user.user %>" />
+          </div>
+          <div class="col py-2 px-2">
+            <label for="password">Password : </label>
+            <input type="password" name="password" id="password" maxlength="50" value="<%= user.password %>" />
+            <br /> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col px-2 py-2">
+            <input class="btn mybtn" id="save" type="submit" value="ตกลง" />           
+            <a class="btn mybtn2" id="cancel" href="/aMain">ยกเลิก</a>
+          </div>
+        </div>
         </form>
-    </div>
-
-    
+      </div>    
 </body>
-<script>
-    var btn = document.getElementById("btnManage")
-    var pos = "<%= position %>"
 
-    function myFunction(){
-        if(pos == "พนักงาน")
-        btn.style.visibility = "hidden";
-    }
+<style>
+  p {
+    font-weight: bolder;
+  }
+
+  .borderpx {
+    border: 2px solid rgb(0, 0, 0);
+  }
+
+  .mybtn {
+    background-color: rgb(154, 255, 71);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .mybtn2 {
+    background-color: rgb(245, 78, 78);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+
+  function required(){
+    var empt = document.form.email.value
+    var empt2 = document.form.password.value
+    var empt3 = document.form.name.value
+    var empt4 = document.form.surname.value
+    var empt5 = document.form.position.value
+    var empt6 = document.form.salary.value
+    var empt7 = document.form.total_sale.value
+    if(
+        empt === '' ||
+        empt2 === '' ||
+        empt3 === '' ||
+        empt4 === '' ||
+        empt5 === '' ||
+        empt6 === '' ||
+        empt7 === ''
+      ){
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน')
+        return false
+      }else{
+        document.getElementById('form').action = '/update'
+        document.getElementById('form').method = 'POST'
+        alert('เพิ่มข้อมูลสำเร็จ')
+        return true
+      }
+  }
 
 </script>
 

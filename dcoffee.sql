@@ -11,7 +11,7 @@
  Target Server Version : 100515
  File Encoding         : 65001
 
- Date: 15/03/2022 00:36:05
+ Date: 26/03/2022 16:19:41
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `mst_employee`  (
   `salary` double(20, 2) NULL DEFAULT NULL,
   `total_sale` double(20, 2) NULL DEFAULT NULL,
   PRIMARY KEY (`id_employee`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mst_employee
@@ -52,7 +52,7 @@ CREATE TABLE `mst_security`  (
   PRIMARY KEY (`id_security`) USING BTREE,
   INDEX `id_employee`(`id_employee` ASC) USING BTREE,
   CONSTRAINT `mst_security_ibfk_1` FOREIGN KEY (`id_employee`) REFERENCES `mst_employee` (`id_employee`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mst_security
@@ -60,7 +60,7 @@ CREATE TABLE `mst_security`  (
 INSERT INTO `mst_security` VALUES (1, 'sutgai.t@gmail.com', 'qw123', 1);
 INSERT INTO `mst_security` VALUES (2, 'manee.r@gmail.com', 'as123', 2);
 INSERT INTO `mst_security` VALUES (3, 'hex@gmail.com', '123', 3);
-INSERT INTO `mst_security` VALUES (4, 'hss@gmail.com', '525', 5);
+INSERT INTO `mst_security` VALUES (5, 'hss@gmail.com', '525', 5);
 INSERT INTO `mst_security` VALUES (6, 'grimjakkrit@gmail.com', 'asd', 6);
 
 -- ----------------------------
@@ -74,7 +74,7 @@ CREATE TABLE `trn_login`  (
   PRIMARY KEY (`id_login`) USING BTREE,
   INDEX `id_employee`(`id_employee` ASC) USING BTREE,
   CONSTRAINT `trn_login_ibfk_1` FOREIGN KEY (`id_employee`) REFERENCES `mst_employee` (`id_employee`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 95 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 95 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of trn_login
@@ -185,7 +185,7 @@ CREATE TABLE `trn_logout`  (
   PRIMARY KEY (`id_logout`) USING BTREE,
   INDEX `id_employee`(`id_employee` ASC) USING BTREE,
   CONSTRAINT `trn_logout_ibfk_1` FOREIGN KEY (`id_employee`) REFERENCES `mst_employee` (`id_employee`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of trn_logout

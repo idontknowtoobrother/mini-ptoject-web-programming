@@ -1,0 +1,90 @@
+<html lang="en">
+
+<head>
+  <title>การลบข้อมูลผู้ใช้</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="container borderpx">
+    <div class="row py-2 px-2 borderpx" style="background-color: rgb(134, 243, 83);">
+      <div class="col">
+        <h4 class="text-center">การลบข้อมูลผู้ใช้</h4>
+      </div>
+    </div>  
+      <div class="row pt-3">
+        <div class="col">
+          <h4>ข้อมูลผู้ใช้ :</h4>
+        </div>
+      </div>
+      <form id="form" name="form" onsubmit="required()">
+        <input type="hidden" value="<%= user.id_employee %>" name="id_employee">
+        <div class="row py-2 px-3">
+          <div class="col py-2 px-2">
+            <label for="name">ชื่อ : <%= user.name %></label>
+            <br />
+            <label for="position">ตำแหน่ง : <%= user.position %></label>
+            <br />
+          </div>
+        <div class="col py-2 px-2">
+          <label for="surname">สกุล : <%= user.surname %></label>
+          <br />
+        </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col px-2 py-2">
+            <input class="btn mybtn" id="save" type="submit" value="ตกลง" />           
+            <a class="btn mybtn2" id="cancel" href="/aMain">ยกเลิก</a>
+          </div>
+        </div>
+        </form>
+      </div>    
+</body>
+
+<style>
+  p {
+    font-weight: bolder;
+  }
+
+  .borderpx {
+    border: 2px solid rgb(0, 0, 0);
+  }
+
+  .mybtn {
+    background-color: rgb(154, 255, 71);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .mybtn2 {
+    background-color: rgb(245, 78, 78);
+    border-radius: 4px;
+    border-color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 6px 28px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+
+  function required(){
+    document.getElementById('form').action = '/delete'
+    document.getElementById('form').method = 'POST'
+    return true
+  }
+
+</script>
+
+</html>
